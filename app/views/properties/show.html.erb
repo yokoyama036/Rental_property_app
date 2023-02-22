@@ -1,0 +1,38 @@
+<h2>閲覧</h2>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>物件名:</strong>
+  <%= @property.name %>
+</p>
+<p>
+  <strong>賃料:</strong>
+  <%= @property.rent %>
+</p>
+<p>
+  <strong>住所:</strong>
+  <%= @property.adress %>
+</p>
+<p>
+  <strong>築年数:</strong>
+  <%= @property.age %>
+</p>
+<p>
+  <strong>備考:</strong>
+  <%= @property.note %>
+</p>
+
+________________________________________________________
+<p><h3>最寄り駅登録数：<%= @property.stations.count %></h3></p>
+<% i = 0 %>
+<% @property.stations.each do |s| %>
+  <% if @property.stations.any? %>
+<h3>最寄り駅<%= i +=1 %></h3>
+    <p>路線名：<%= s.line_name %></p>
+    <p>駅名：<%= s.station_name %></p>
+    <p>徒歩分数：<%= s.time %>分</p>
+  <% end %>
+<% end %>
+
+<%= link_to '編集', edit_property_path(@property) %> |
+<%= link_to '戻る', properties_path %>
