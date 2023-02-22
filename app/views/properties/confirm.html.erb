@@ -1,0 +1,31 @@
+<h3>以下の内容で登録しますか？</h3>
+<%= form_with(model: @property, url: properties_path, local: true) do |form| %>
+  <%= form.hidden_field :name %>
+  <%= form.hidden_field :rent %>
+  <%= form.hidden_field :adress %>
+  <%= form.hidden_field :age %>
+  <%= form.hidden_field :note %>
+  <p>物件情報:<%= @property.name %></p>
+  <p>賃料:<%= @property.rent %></p>
+  <p>住所:<%= @property.adress %></p>
+  <p>築年数:<%= @property.age %></p>
+  <p>備考:<%= @property.note %></p>
+
+  <%= form.fields_for :stations do |f| %>
+    <%= f.hidden_field :line_name %>
+    <%= f.hidden_field :station_name %>
+    <%= f.hidden_field :time %>
+  <% end %>
+      <% i = 0 %>
+    <% @property.stations.each do |station|%>
+      <h4>最寄駅<%= i += 1 %></h4>
+      <p>路線名:<%= station.line_name %></p>
+      <p>駅名:<%= station.station_name %></p>
+      <p>徒歩分数:<%= station.time %></p>
+    <% end %>
+
+  <%= form.submit "登録する" %>
+  <%= form.submit "戻る", name: 'back' %>
+
+<% end %>
+
